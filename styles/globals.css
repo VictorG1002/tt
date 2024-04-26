@@ -1,0 +1,23 @@
+
+* {
+  outline: none;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-size: 16px;
+  background-color: #E3EAEF;
+}
+
+
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  list-style-type: none;
+}
+
