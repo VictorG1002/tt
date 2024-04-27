@@ -1,30 +1,15 @@
-interface MyLocation {
-  name: string;
-  id: string;
-  parentId: string | null;
-}
+import { MyAsset, MyLocation, MyTreeItem } from "@/contexts/global/types";
 
-interface MyAsset {
-  name: string;
-  id: string;
-  locationId: string | null;
-  parentId: string | null;
-  sensorType: string | null;
-  status: string | null;
-}
+import ApexLocations from "./jsons/Apex/locations.json";
+import ApexAssets from "./jsons/Apex/assets.json";
 
-interface MyTreeItem {
-  id?: string;
-  parentId?: string | null;
-  children?: MyTreeItem[];
-  name?: string;
-  sensorType?: string | null;
-  status?: string | null;
-}
+import TobiasLocations from "./jsons/Tobias/locations.json";
+import TobiasAssets from "./jsons/Tobias/assets.json";
 
+import JaguarLocations from "./jsons/Jaguar/locations.json";
+import JaguarAssets from "./jsons/Jaguar/assets.json";
 
-export function createTree(locations:MyLocation[], assets: MyAsset[]) {
-  
+export function createTree(locations: MyLocation[], assets: MyAsset[]) {
   let treeItemsIndex = new Map<string, MyTreeItem>();
 
   let root: MyTreeItem = {
@@ -38,7 +23,7 @@ export function createTree(locations:MyLocation[], assets: MyAsset[]) {
       id: location.id,
       parentId: location.parentId,
       name: location.name,
-      children: []
+      children: [],
     };
     treeItemsIndex.set(location.id, locationTree);
   }
@@ -67,7 +52,20 @@ export function createTree(locations:MyLocation[], assets: MyAsset[]) {
     }
   }
 
-  return root.children
+  return root.children;
+}
+
+export function getTreeData(activeTab: string) {
+  switch (activeTab) {
+    case "Apex Unit":
+      return createTree(ApexLocations, ApexAssets);
+    case "Tobias Unit":
+      return createTree(TobiasLocations, TobiasAssets);
+    case "Jaguar Unit":
+      return createTree(JaguarLocations, JaguarAssets);
+    default:
+      return createTree(ApexLocations, ApexAssets);
+  }
 }
 
 // const tree = createTree(locations, assets)
