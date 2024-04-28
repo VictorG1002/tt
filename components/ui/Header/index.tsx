@@ -6,6 +6,8 @@ import { useGlobal } from "@/contexts/global";
 
 import { tabsOptions } from "@/utils/constants";
 
+import { AiOutlineGold } from "react-icons/ai";
+
 import * as S from "./styles";
 
 export default function Header() {
@@ -19,6 +21,8 @@ export default function Header() {
       <div className="buttons">
         {tabsOptions.map((option, index) => (
           <S.ButtonHeader key={index} $isSelected={activeTab === option} onClick={() => setActiveTab(option)}>
+            <AiOutlineGold size={14} color="#ffffff" />
+
             {option}
           </S.ButtonHeader>
         ))}
