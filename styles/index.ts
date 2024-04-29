@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+interface ButtonProps {
+  $isSelected: boolean;
+}
+
 export const HomeContainer = styled.div`
   display: flex;
   padding: 16px;
@@ -8,6 +12,7 @@ export const HomeContainer = styled.div`
   border-radius: 4px;
   border: 1px solid #d8dfe6;
   background: #fff;
+  min-height: 93vh;
 
   & .header {
     display: flex;
@@ -31,6 +36,11 @@ export const HomeContainer = styled.div`
       }
     }
   }
+
+& .buttons {
+  display: flex;
+  gap: 8px;
+}
 
   & .columns {
     display: grid;
@@ -70,7 +80,6 @@ export const HomeContainer = styled.div`
       }
   }
 
-
   & .view {
     display: flex;
     flex-direction: column;
@@ -80,5 +89,26 @@ export const HomeContainer = styled.div`
     border-bottom: 1px solid var(--Shapes-Border-input-Border-card, #D0D7DE);
     border-bottom-left-radius: 2px;
     border-bottom-right-radius: 2px;
+    min-height: 79vh;
   }
+`;
+
+export const Button = styled.button<ButtonProps>`
+  display: flex;
+  padding: 4px 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  cursor: pointer;
+  border-radius: 2px;
+  background: ${(props) => (props.$isSelected === true ? "#2188ff" : "#023B78")};
+  box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.05);
+
+  color: #fff;
+  text-align: center;
+  font-family: Inter;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
 `;

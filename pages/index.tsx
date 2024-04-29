@@ -6,22 +6,23 @@ import { IoSearchOutline } from 'react-icons/io5';
 import TreeView from '@/components/ui/TreeView';
 
 import * as S from '../styles/index'
+import { buttonsOptions } from '@/utils/constants';
 
 export default function Home() {
 
-  const { dispatch, state, activeTab } = useGlobal();
+  const { dispatch, state, activeTab , selectedFilter, setSelectedFilter, } = useGlobal();
   const [searchQuery, setSearchQuery] = useState('')
-
-
+  
   function onHandleSearch(e: React.ChangeEvent<HTMLInputElement>) {
     const query = e.target.value;
+
     setSearchQuery(query)
+
     dispatch({ type: 'SEARCH', query })
   }
 
   useEffect(() => {
     dispatch({ type: 'INIT_DATA', data: getTreeData(activeTab) })
-    console.log('rodou')
   }, [activeTab])
 
   return (
@@ -29,14 +30,16 @@ export default function Home() {
       <section className="header">
         <div className="title">Ativos<span> / {activeTab}</span></div>
 
-        <div>
-          <button>
-            Sensor de Energia
-          </button>
-
-          <button>
-            Crítico
-          </button>
+        <div className='buttons'>
+          {buttonsOptions.map((button) => (
+            <S.Button $isSelected={selectedFilter === button.type} key={button.type} onClick={() => {
+              setSelectedFilter(button.type)
+              dispatch({ type: button.type, state: state }
+              )
+            }}>
+              {button.label}
+            </S.Button>
+          ))}
         </div>
       </section>
 
@@ -45,9 +48,7 @@ export default function Home() {
           <div className="input">
             <input value={searchQuery} type="text" placeholder="Buscar Ativo ou Local" onChange={onHandleSearch} />
 
-            <button>
-              <IoSearchOutline size={14} />
-            </button>
+            <IoSearchOutline size={14} />
           </div>
 
           <div className="view">
@@ -56,7 +57,7 @@ export default function Home() {
         </div>
 
 
-        <div>b</div>
+        <div></div>
       </section>
     </S.HomeContainer>
   );
