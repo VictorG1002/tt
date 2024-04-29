@@ -95,17 +95,16 @@ export const HomeContainer = styled.div`
 
 export const Button = styled.button<ButtonProps>`
   display: flex;
-  padding: 4px 8px;
+  padding: 6px 16px 6px 14px;
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   border: none;
   cursor: pointer;
-  border-radius: 2px;
-  background: ${(props) => (props.$isSelected === true ? "#2188ff" : "#023B78")};
-  box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.05);
-
-  color: #fff;
+  border-radius: 3px;
+  background: ${(props) => (props.$isSelected === true ? "#2188ff" : '#fff')};
+  border: 1px solid #D8DFE6;
+  color: ${(props) => (props.$isSelected === true ? "#fff" : '#77818C')};
   text-align: center;
   font-family: Inter;
   font-size: 12px;

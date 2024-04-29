@@ -7,12 +7,14 @@ import TreeView from '@/components/ui/TreeView';
 
 import * as S from '../styles/index'
 import { buttonsOptions } from '@/utils/constants';
+import { BsExclamationCircle } from 'react-icons/bs';
+import { AiOutlineThunderbolt } from 'react-icons/ai';
 
 export default function Home() {
 
-  const { dispatch, state, activeTab , selectedFilter, setSelectedFilter, } = useGlobal();
+  const { dispatch, state, activeTab, selectedFilter, setSelectedFilter, } = useGlobal();
   const [searchQuery, setSearchQuery] = useState('')
-  
+
   function onHandleSearch(e: React.ChangeEvent<HTMLInputElement>) {
     const query = e.target.value;
 
@@ -37,6 +39,9 @@ export default function Home() {
               dispatch({ type: button.type, state: state }
               )
             }}>
+              {button.type === 'CRITICAL_STATUS' ? <BsExclamationCircle size={18} color={selectedFilter === button.type ? '#fff' : '#2188FF'} />
+                : <AiOutlineThunderbolt color={selectedFilter === button.type ? '#fff' : '#2188FF'} size={18} />
+              }
               {button.label}
             </S.Button>
           ))}
