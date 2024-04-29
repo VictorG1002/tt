@@ -3,6 +3,8 @@ import { Dispatch, SetStateAction } from "react"
 export interface IGlobalContext {
   activeTab: string
   setActiveTab: Dispatch<SetStateAction<string>>
+  state: MyTreeItem[]
+  dispatch: Dispatch<any>
 }
 
 export interface IGlobalProviderProps {
@@ -29,4 +31,5 @@ export interface MyTreeItem {
   sensorType?: string | null;
   status?: string | null;
   locationId?: boolean;
+  isExpanded?: boolean;
 }
