@@ -1,39 +1,38 @@
-import React, { useState } from "react";
+import React from "react";
 
-import { IoIosArrowDown } from "react-icons/io";
-
-
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { IoCubeOutline, IoLocationOutline } from "react-icons/io5";
 import { FaCircle, FaCodepen } from "react-icons/fa";
 import { MdBolt } from "react-icons/md";
+
 import { MyTreeItem } from "@/contexts/global/types";
+import { useGlobal } from "@/contexts/global";
 
 import * as S from './styles'
 
 const TreeNode = ({ node }: { node: MyTreeItem }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const toggleNode = () => setIsOpen(!isOpen);
 
-
-  // console.log(node, 'node')
+  const { dispatch } = useGlobal()
 
 
   return (
     <S.TreeNodeContainer>
       <div className="title">
+
         {node.children && (
-
-
-          <button onClick={toggleNode} className="toggle-icon" disabled={node.children.length === 0}>
-            <IoIosArrowDown size={14} />
+          <button onClick={() =>
+            dispatch({
+              type: "TOGGLE_NODE",
+              id: node.id,
+              isExpanded: !node.isExpanded
+            })} className="toggle-icon" disabled={node.children.length === 0}>
+            {node.isExpanded ? <IoIosArrowUp size={14} /> : <IoIosArrowDown size={14} />}
           </button>
         )}
-
 
         {!node.sensorType && node.sensorType !== null && node.status !== null && (
           <IoLocationOutline size={22} color="#2188FF" />
         )}
-
 
         {node.sensorType === null && node.parentId === null && node.status === null && (
           <IoCubeOutline size={22} color="#2188FF" />
@@ -43,7 +42,7 @@ const TreeNode = ({ node }: { node: MyTreeItem }) => {
           <IoCubeOutline size={22} color="#2188FF" />
         )}
 
-        {!node.sensorType && node.parentId && !node.locationId  && node.status === null   && (
+        {!node.sensorType && node.parentId && !node.locationId && node.status === null && (
           <IoCubeOutline size={22} color="#2188FF" />
         )}
 
@@ -65,7 +64,7 @@ const TreeNode = ({ node }: { node: MyTreeItem }) => {
         </div>
       </div>
 
-      {isOpen && <TreeView data={node.children || []} />}
+      {node.isExpanded && <TreeView data={node.children || []} />}
     </S.TreeNodeContainer>
   );
 };
