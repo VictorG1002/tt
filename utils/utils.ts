@@ -14,6 +14,7 @@ export function createTree(locations: MyLocation[], assets: MyAsset[]) {
 
   let root: MyTreeItem = {
     id: "root",
+    name: 'root',
     parentId: null,
     children: [],
   };
@@ -32,6 +33,7 @@ export function createTree(locations: MyLocation[], assets: MyAsset[]) {
     let assetTree: MyTreeItem = {
       id: asset.id,
       parentId: asset.parentId ?? asset.locationId,
+      locationId: asset.locationId ? true : false,
       name: asset.name,
       sensorType: asset.sensorType,
       status: asset.status,

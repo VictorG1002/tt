@@ -28,4 +28,5 @@ export interface MyTreeItem {
   name?: string;
   sensorType?: string | null;
   status?: string | null;
+  locationId?: boolean;
 }
