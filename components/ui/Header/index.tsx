@@ -12,7 +12,7 @@ import * as S from "./styles";
 
 export default function Header() {
 
-  const { setActiveTab, activeTab } = useGlobal();
+  const { setActiveTab, activeTab, setSelectedFilter } = useGlobal();
 
   return (
     <S.HeaderContainer>
@@ -20,7 +20,11 @@ export default function Header() {
 
       <div className="buttons">
         {tabsOptions.map((option, index) => (
-          <S.ButtonHeader key={index} $isSelected={activeTab === option} onClick={() => setActiveTab(option)}>
+          <S.ButtonHeader key={index} $isSelected={activeTab === option} onClick={() => {
+            setSelectedFilter('')
+            setActiveTab(option)
+          }
+          }>
             <AiOutlineGold size={14} color="#ffffff" />
 
             {option}
