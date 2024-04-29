@@ -29,13 +29,13 @@ const searchNodesWithCriticalStatus = (data: MyTreeItem[], isExpanded: boolean):
   };
 
   return data.map((node) => {
-    const alertInChildren = node.children ? hasAlertInChildren(node) : node.status === 'alert';
+    const alertInChildren = node.children ? hasAlertInChildren(node) : false;
 
     if (node.children) {
       return {
         ...node,
         isExpanded: alertInChildren ? true : isExpanded,
-        isHighlight: alertInChildren,
+        isHighlight: node.status === 'alert',
         children: searchNodesWithCriticalStatus(node.children, alertInChildren)
       };
     }
