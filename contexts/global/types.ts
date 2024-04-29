@@ -5,6 +5,8 @@ export interface IGlobalContext {
   setActiveTab: Dispatch<SetStateAction<string>>
   state: MyTreeItem[]
   dispatch: Dispatch<any>
+  selectedFilter: string
+  setSelectedFilter: Dispatch<SetStateAction<string>>
 }
 
 export interface IGlobalProviderProps {
@@ -24,6 +26,7 @@ export interface MyAsset {
   status: string | null;
 }
 export interface MyTreeItem {
+  parent?: any
   id?: string;
   parentId?: string | null;
   children?: MyTreeItem[];
@@ -32,4 +35,5 @@ export interface MyTreeItem {
   status?: string | null;
   locationId?: boolean;
   isExpanded?: boolean;
+  isHighlight?: boolean;
 }
