@@ -15,6 +15,9 @@ const TreeNode = ({ node }: { node: MyTreeItem }) => {
   const toggleNode = () => setIsOpen(!isOpen);
 
 
+  // console.log(node, 'node')
+
+
   return (
     <S.TreeNodeContainer>
       <div className="title">
@@ -27,11 +30,20 @@ const TreeNode = ({ node }: { node: MyTreeItem }) => {
         )}
 
 
-        {!node.sensorType && !node.status && !node.locationId && node.sensorType !== null && node.status !== null &&  (
+        {!node.sensorType && node.sensorType !== null && node.status !== null && (
           <IoLocationOutline size={22} color="#2188FF" />
         )}
 
-        {!node.sensorType && (node.locationId ) && (
+
+        {node.sensorType === null && node.parentId === null && node.status === null && (
+          <IoCubeOutline size={22} color="#2188FF" />
+        )}
+
+        {node.locationId && node.parentId && node.children && !node.sensorType && (
+          <IoCubeOutline size={22} color="#2188FF" />
+        )}
+
+        {!node.sensorType && node.parentId && !node.locationId  && node.status === null   && (
           <IoCubeOutline size={22} color="#2188FF" />
         )}
 
@@ -48,7 +60,7 @@ const TreeNode = ({ node }: { node: MyTreeItem }) => {
           )}
 
           {node.status === 'alert' && (
-            <FaCircle  size={8} color="red" />
+            <FaCircle size={8} color="red" />
           )}
         </div>
       </div>
