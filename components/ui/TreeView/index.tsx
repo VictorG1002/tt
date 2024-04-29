@@ -16,9 +16,8 @@ const TreeNode = ({ node }: { node: MyTreeItem }) => {
 
 
   return (
-    <S.TreeNodeContainer>
-      <div className="title">
-
+    <S.TreeNodeContainer >
+      <S.TreeNodeTitleBox isHighlight={node.isHighlight}>
         {node.children && (
           <button onClick={() =>
             dispatch({
@@ -26,28 +25,31 @@ const TreeNode = ({ node }: { node: MyTreeItem }) => {
               id: node.id,
               isExpanded: !node.isExpanded
             })} className="toggle-icon" disabled={node.children.length === 0}>
-            {node.isExpanded ? <IoIosArrowUp size={14} /> : <IoIosArrowDown size={14} />}
+
+            {node.isExpanded ?
+              <IoIosArrowUp size={14} color={node.isHighlight ? '#fff' : ''} />
+              : <IoIosArrowDown size={14} color={node.isHighlight ? '#fff' : ''} />}
           </button>
         )}
 
         {!node.sensorType && node.sensorType !== null && node.status !== null && (
-          <IoLocationOutline size={22} color="#2188FF" />
+          <IoLocationOutline size={22} color={node.isHighlight ? '#fff' : '#2188FF'} />
         )}
 
         {node.sensorType === null && node.parentId === null && node.status === null && (
-          <IoCubeOutline size={22} color="#2188FF" />
+          <IoCubeOutline size={22} color={node.isHighlight ? '#fff' : '#2188FF'} />
         )}
 
         {node.locationId && node.parentId && node.children && !node.sensorType && (
-          <IoCubeOutline size={22} color="#2188FF" />
+          <IoCubeOutline size={22} color={node.isHighlight ? '#fff' : '#2188FF'} />
         )}
 
         {!node.sensorType && node.parentId && !node.locationId && node.status === null && (
-          <IoCubeOutline size={22} color="#2188FF" />
+          <IoCubeOutline size={22} color={node.isHighlight ? '#fff' : '#2188FF'} />
         )}
 
         {node.sensorType && (
-          <FaCodepen size={22} color="#2188FF" />
+          <FaCodepen size={22} color={node.isHighlight ? '#fff' : '#2188FF'} />
         )}
 
 
@@ -62,7 +64,7 @@ const TreeNode = ({ node }: { node: MyTreeItem }) => {
             <FaCircle size={8} color="red" />
           )}
         </div>
-      </div>
+      </S.TreeNodeTitleBox>
 
       {node.isExpanded && <TreeView data={node.children || []} />}
     </S.TreeNodeContainer>

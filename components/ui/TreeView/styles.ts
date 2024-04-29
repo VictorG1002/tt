@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+interface TreeNodeProps {
+  isHighlight?: boolean;
+}
+
 export const TreeViewContainer = styled.div`
   margin: 0;
   padding: 0;
@@ -11,11 +15,6 @@ export const TreeNodeContainer = styled.div`
   flex-direction: column;
   margin: 10px 0;
   padding-left: 20px;
-
-  & .title {
-    display: flex;
-    gap: 4px;
-  }
 
   & span {
     text-align: center;
@@ -40,3 +39,17 @@ export const TreeNodeContainer = styled.div`
     gap: 4px
   }
 `;
+
+
+export const TreeNodeTitleBox = styled.div<TreeNodeProps>`
+    display: flex;
+    gap: 4px;
+    background: ${({ isHighlight }) => isHighlight ? '#2188FF' : 'transparent'};
+   
+
+
+    & span {
+      color: ${({ isHighlight }) => isHighlight ? '#ffff' : '#17192d'};
+    }
+  
+`
